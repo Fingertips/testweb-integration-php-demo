@@ -3,11 +3,9 @@
 require 'global.php';
 
 $response = get('/instruments');
-
 if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
-
 $instruments = $response['data'];
 
 ?>

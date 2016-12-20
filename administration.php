@@ -3,12 +3,36 @@
 require 'global.php';
 
 $response = get('/instruments/' . $_REQUEST['instrument_id']);
-
 if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
+$instrument = $response['data'];
 
-$instrument = $response['data']
+$completed = true;
+$valid_responses = [];
+foreach ($instrument['sections'] as $section) {
+  foreach ($section['items'] as $item) {
+    $options = $item['options'] ? $item['options'] : $instrument['options'];
+    $option_values = array_map(function($o) { return $o['value']; }, $options);
+    if (in_array($_POST[$item['item_id']], $option_values)) {
+      $valid_responses[$item['item_id']] = $_POST[$item['item_id']];
+    } else {
+      $completed = false;
+    }
+  }
+}
+if ($completed) {
+  $response = post('/administrations', [
+    'instrument_id' => $instrument['instrument_id'],
+    'responses' => $valid_responses
+    ]);
+  if ($response['status'] == 201) {
+    header('Location: report.php?administration_id=' . $response['data']['administration_id'] . '&norm_id=' . $instrument['norms'][0]['norm_id']);
+    exit();
+  } else {
+    exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +49,10 @@ $instrument = $response['data']
 <h1><?php echo $instrument['title'] ?></h1>
 
 <p><?php echo nl2br($instrument['instructions']) ?></p>
+
+<?php if (!empty($valid_responses)) { ?>
+  <p class="invalid">Beantwoord alle items om verder te gaan.</p>
+<?php } ?>
 
 <form method="post">
 
@@ -45,7 +73,11 @@ $instrument = $response['data']
             <?php $options = $item['options'] ? $item['options'] : $instrument['options']; ?>
             <?php foreach ($options as $option) { ?>
               <label>
-                <input type="radio" name="<?php echo $item['item_id'] ?>" value="<?php echo $option['value'] ?>">
+                <input type="radio" 
+                  name="<?php echo $item['item_id'] ?>" 
+                  value="<?php echo $option['value'] ?>"
+                  <?php echo ($_POST[$item['item_id']] == $option['value']) ? 'checked' : '' ?>
+                  >
                 <?php echo $option['label'] ?>
               </label>
             <?php } ?>
@@ -62,8 +94,6 @@ $instrument = $response['data']
 </form>
 
 <p class="note">TODO: Test with multiple sections and per-item answer options.</p>
-
-<pre><?php var_dump($response); ?></pre>
 
 </div>
 

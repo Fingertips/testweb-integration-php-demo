@@ -46,6 +46,16 @@ h2
   line-height: 1.2;
 }
 
+p.invalid
+{
+  margin: 2em 0;
+  padding: 0.75em 1em;
+  border: 2px solid #c33;
+  background: #fee;
+  color: #c33;
+  font-weight: bold;
+}
+
 ul.sections,
 ul.sections ol
 {

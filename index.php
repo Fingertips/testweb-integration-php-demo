@@ -8,20 +8,35 @@ if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
 
-?>
+$instruments = $response['data'];
 
-<h1>Choose an instrument</h1>
+?>
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Instrumenten</title>
+<link rel="stylesheet" media="all" href="default.css">
+</head>
+<body>
+
+<div>
+
+<h1>Kies een instrument</h1>
 
 <ul>
-  <?php foreach ($response['data'] as $instrument) { ?>
+  <?php foreach ($instruments as $instrument) { ?>
     <li>
-      <a href="instrument.php?instrument_id=<?php echo $instrument['instrument_id']; ?>">
+      <a href="administration.php?instrument_id=<?php echo $instrument['instrument_id']; ?>">
         <?php echo $instrument['title']; ?>
       </a>
     </li>
   <?php } ?>
 </ul>
 
-<hr>
+<p class="note">Please note that you should not implement a selection menu like this as part of your integration. See the “Finding an instrument” section in the Integration API documentation for details.</p>
 
-<pre><?php var_dump($response); ?></pre>
+</div>
+
+</body>
+</html>

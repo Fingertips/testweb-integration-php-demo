@@ -59,10 +59,10 @@ if ($completed) {
 <ul class="sections">
   <?php foreach ($instrument['sections'] as $section) { ?>
     <li>
-      <?php if (!$section['title']) { ?>
+      <?php if ($section['title']) { ?>
         <h2><?php echo $section['title'] ?></h2>
       <?php } ?>
-      <?php if (!$section['description']) { ?>
+      <?php if ($section['description']) { ?>
         <p><?php echo nl2br($section['description']) ?></p>
       <?php } ?>
       <ol>
@@ -93,7 +93,7 @@ if ($completed) {
 
 </form>
 
-<p class="note">TODO: Test with multiple sections and per-item answer options.</p>
+<!-- <pre><?php var_dump($instrument) ?></pre> -->
 
 </div>
 

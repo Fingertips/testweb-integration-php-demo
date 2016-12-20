@@ -34,6 +34,8 @@ $instruments = $response['data'];
 
 <p class="note">Please note that you should not implement a selection menu like this as part of your integration. See the “Finding an instrument” section in the Integration API documentation for details.</p>
 
+<!-- <pre><?php var_dump($instruments) ?></pre> -->
+
 </div>
 
 </body>

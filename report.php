@@ -55,6 +55,9 @@ $instrument = $response['data'];
   <?php } ?>
 </ul>
 
+<!-- <pre><?php var_dump($administration) ?></pre> -->
+<!-- <pre><?php var_dump($instrument) ?></pre> -->
+
 </div>
 
 </body>

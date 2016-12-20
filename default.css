@@ -7,7 +7,7 @@ body
 body > div
 {
   margin: 0 auto;
-  padding: 1em 4em;
+  padding: 1em;
   max-width: 80em;
 }
 
@@ -97,6 +97,35 @@ ul.sections ol li div label
 {
   display: inline-block;
   padding: 0.5em;
+}
+
+table
+{
+  margin: 2em 0;
+  border-collapse: collapse;
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+}
+table th,
+table td
+{
+  padding: 0.5em;
+  vertical-align: top;
+  text-align: left;
+}
+table tr
+{
+  background: #f8f8f8;
+}
+table tr + tr
+{
+  border-top: 1px solid #eee;
+}
+table tr.total
+{
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  background: none;
 }
 
 p.note

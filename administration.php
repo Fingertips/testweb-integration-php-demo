@@ -27,7 +27,7 @@ if ($completed) {
     'responses' => $valid_responses
     ]);
   if ($response['status'] == 201) {
-    header('Location: report.php?administration_id=' . $response['data']['administration_id'] . '&norm_id=' . $instrument['norms'][0]['norm_id']);
+    header('Location: report.php?administration_id=' . $response['data']['administration_id']);
     exit();
   } else {
     exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);

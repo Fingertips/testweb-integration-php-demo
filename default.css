@@ -22,7 +22,7 @@ h1, h2
 }
 code, pre, tt
 {
-  font-family: 'Lucida Console', 'Andale Mono', monospace;
+  font: 12px/1.2 'Lucida Console', 'Andale Mono', monospace;
 }
 
 a
@@ -128,11 +128,16 @@ table tr.total
   background: none;
 }
 
-p.note
+p.note,
+div.debug
 {
   margin: 2em 0;
   padding: 0.75em 1em;
   border: 1px solid #ccc;
   background: #eee;
   color: #444;
+}
+div.debug h2
+{
+  margin: 0;
 }

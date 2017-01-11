@@ -55,8 +55,14 @@ $instrument = $response['data'];
   <?php } ?>
 </ul>
 
-<!-- <pre><?php var_dump($administration) ?></pre> -->
-<!-- <pre><?php var_dump($instrument) ?></pre> -->
+<div class="debug">
+<h2>API response (administration):</h2>
+<pre><?php var_dump($administration) ?></pre>
+</div>
+<div class="debug">
+<h2>API response (instrument details):</h2>
+<pre><?php var_dump($instrument) ?></pre>
+</div>
 
 </div>
 

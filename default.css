@@ -86,6 +86,7 @@ ul.sections ol li:nth-child(even)
 }
 ul.sections ol li p
 {
+  display: inline-block;
   margin: 0;
 }
 ul.sections ol li div

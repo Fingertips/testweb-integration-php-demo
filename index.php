@@ -36,6 +36,7 @@ $instruments = $response['data'];
 
 <div class="debug">
 <h2>API response (available instruments):</h2>
+<p>Completed in <?php echo $response['time'] ?>ms.</p>
 <pre><?php var_dump($instruments) ?></pre>
 </div>
 

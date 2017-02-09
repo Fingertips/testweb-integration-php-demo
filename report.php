@@ -8,11 +8,11 @@ if ($response['status'] != 200) {
 }
 $administration = $response['data'];
 
-$response = get('/instruments/' . $administration['instrument_id']);
-if ($response['status'] != 200) {
-  exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
+$response2 = get('/instruments/' . $administration['instrument_id']);
+if ($response2['status'] != 200) {
+  exit('HTTP ' . $response2['status'] . ' ' . $response2['data']['message']);
 }
-$instrument = $response['data'];
+$instrument = $response2['data'];
 
 ?>
 <!DOCTYPE html>
@@ -57,10 +57,13 @@ $instrument = $response['data'];
 
 <div class="debug">
 <h2>API response (administration):</h2>
+
+<p>Completed in <?php echo $response['time'] ?>ms.</p>
 <pre><?php var_dump($administration) ?></pre>
 </div>
 <div class="debug">
 <h2>API response (instrument details):</h2>
+<p>Completed in <?php echo $response2['time'] ?>ms.</p>
 <pre><?php var_dump($instrument) ?></pre>
 </div>
 

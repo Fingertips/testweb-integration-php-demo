@@ -8,10 +8,12 @@ function get($path) {
   curl_setopt($http, CURLOPT_HTTPHEADER, ['Authorization: SecretKey ' . $secret_key]);
   curl_setopt($http, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($http, CURLOPT_FAILONERROR, false);
+  $time_start = microtime(true);
   $json = json_decode(curl_exec($http), true);
+  $time_end = microtime(true);
   $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
   curl_close($http);
-  return ['status' => $status, 'data' => $json];
+  return ['status' => $status, 'data' => $json, 'time' => round(($time_end - $time_start) * 1000)];
 }
 
 function post($path, $data) {
@@ -22,10 +24,12 @@ function post($path, $data) {
   curl_setopt($http, CURLOPT_FAILONERROR, false);
   curl_setopt($http, CURLOPT_POST, true);
   curl_setopt($http, CURLOPT_POSTFIELDS, json_encode($data));
+  $time_start = microtime(true);
   $json = json_decode(curl_exec($http), true);
+  $time_end = microtime(true);
   $status = curl_getinfo($http, CURLINFO_HTTP_CODE);
   curl_close($http);
-  return ['status' => $status, 'data' => $json];
+  return ['status' => $status, 'data' => $json, 'time' => round(($time_end - $time_start) * 1000)];
 }
 
 ?>

@@ -95,6 +95,7 @@ if ($completed) {
 
 <div class="debug">
 <h2>API response (instrument details):</h2>
+<p>Completed in <?php echo $response['time'] ?>ms.</p>
 <pre><?php var_dump($instrument) ?></pre>
 </div>
 

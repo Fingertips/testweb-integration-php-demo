@@ -35,22 +35,22 @@ $instrument = $response2['data'];
   <thead>
     <tr>
       <th><?php echo $administration['labels']['name']; ?></th>
-      <th><?php echo $administration['labels']['raw_score']; ?></th>
-      <?php if (!is_null($administration['labels']['classification']['quantitative_label'])) { ?>
-        <th><?php echo $administration['labels']['classification']['quantitative_label']; ?></th>
+      <th><?php echo $administration['labels']['raw']; ?></th>
+      <?php if (!is_null($administration['labels']['quantitative'])) { ?>
+        <th><?php echo $administration['labels']['quantitative']; ?></th>
       <?php } ?>
-      <th><?php echo $administration['labels']['classification']['qualitative_label']; ?></th>
+      <th><?php echo $administration['labels']['qualitative']; ?></th>
     </tr>
   </thead>
   <tbody>
   <?php foreach ($administration['scores'] as $score) { ?>
     <tr<?php echo $score['cumulative'] ? ' class="total"' : ''; ?>>
       <th><?php echo $score['name']; ?></th>
-      <td><?php echo $score['raw_score']; ?></td>
-      <?php if (!is_null($administration['labels']['classification']['quantitative_label'])) { ?>
-        <td><?php echo $score['classification']['quantitative_label']; ?></td>
+      <td><?php echo $score['raw']; ?></td>
+      <?php if (!is_null($administration['labels']['quantitative'])) { ?>
+        <td><?php echo $score['quantitative']; ?></td>
       <?php } ?>
-      <td><?php echo $score['classification']['qualitative_label']; ?></td>
+      <td><?php echo $score['qualitative']; ?></td>
     </tr>
   <?php } ?>
   </tbody>

@@ -114,19 +114,37 @@ table td
   vertical-align: top;
   text-align: left;
 }
-table tr
+table th
+{
+  font-weight: normal;
+}
+table thead tr
+{
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+}
+table thead th
+{
+  color: #666;
+}
+table tbody tr
 {
   background: #f8f8f8;
 }
-table tr + tr
+table tbody tr + tr
 {
-  border-top: 1px solid #eee;
+  border-top: 1px solid #ddd;
 }
-table tr.total
+table tbody tr.total
 {
   border-top: 1px solid #888;
   border-bottom: 1px solid #888;
   background: none;
+}
+table tbody tr.total th,
+table tbody tr.total td
+{
+  font-weight: bold;
 }
 
 p.note,

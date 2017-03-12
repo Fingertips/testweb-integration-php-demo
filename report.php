@@ -44,7 +44,7 @@ $instrument = $response2['data'];
   </thead>
   <tbody>
   <?php foreach ($administration['scores'] as $score) { ?>
-    <tr<?php echo $score['cumulative'] ? ' class="total"' : ''; ?>>
+    <tr<?php echo $score['highlight'] ? ' class="highlight"' : ''; ?>>
       <th><?php echo $score['name']; ?></th>
       <td><?php echo $score['raw']; ?></td>
       <?php if (!is_null($administration['labels']['quantitative'])) { ?>

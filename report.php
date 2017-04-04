@@ -2,17 +2,21 @@
 
 require 'global.php';
 
-$response = request('/administrations/' . $_REQUEST['administration_id'] . '?norm_id=' . $_REQUEST['norm_id']);
-if ($response['status'] != 200) {
-  exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
+// GET the report for the current administration.
+$response_1 = request('/administrations/' . $_REQUEST['administration_id'] . '?norm_id=' . $_REQUEST['norm_id']);
+if ($response_1['status'] != 200) {
+  // Show an error message and exit if the response status code is not 200 OK.
+  exit('HTTP ' . $response['status'] . ' ' . $response_1['data']['message']);
 }
-$administration = $response['data'];
+$administration = $response_1['data'];
 
-$response2 = request('/instruments/' . $administration['instrument_id']);
-if ($response2['status'] != 200) {
-  exit('HTTP ' . $response2['status'] . ' ' . $response2['data']['message']);
+// GET details of the instrument used in the administration so that we can show the list of available norms.
+$response_2 = request('/instruments/' . $administration['instrument_id']);
+if ($response_2['status'] != 200) {
+  // Show an error message and exit if the response status code is not 200 OK.
+  exit('HTTP ' . $response_2['status'] . ' ' . $response_2['data']['message']);
 }
-$instrument = $response2['data'];
+$instrument = $response_2['data'];
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +40,7 @@ $instrument = $response2['data'];
     <tr>
       <th><?php echo $administration['labels']['name']; ?></th>
       <th><?php echo $administration['labels']['raw']; ?></th>
-      <?php if (!is_null($administration['labels']['quantitative'])) { ?>
+      <?php if ($administration['labels']['quantitative']) { ?>
         <th><?php echo $administration['labels']['quantitative']; ?></th>
       <?php } ?>
       <th><?php echo $administration['labels']['qualitative']; ?></th>
@@ -47,7 +51,7 @@ $instrument = $response2['data'];
     <tr<?php echo $score['highlight'] ? ' class="highlight"' : ''; ?>>
       <th><?php echo $score['name']; ?></th>
       <td><?php echo $score['raw']; ?></td>
-      <?php if (!is_null($administration['labels']['quantitative'])) { ?>
+      <?php if ($administration['labels']['quantitative']) { ?>
         <td><?php echo $score['quantitative']; ?></td>
       <?php } ?>
       <td><?php echo $score['qualitative']; ?></td>
@@ -71,13 +75,13 @@ $instrument = $response2['data'];
 
 <div class="debug">
 <h2>API response (administration):</h2>
-
-<p>Completed in <?php echo $response['time'] ?>ms.</p>
+<p>Completed in <?php echo $response_1['time'] ?>ms.</p>
 <pre><?php var_dump($administration) ?></pre>
 </div>
+
 <div class="debug">
 <h2>API response (instrument details):</h2>
-<p>Completed in <?php echo $response2['time'] ?>ms.</p>
+<p>Completed in <?php echo $response_2['time'] ?>ms.</p>
 <pre><?php var_dump($instrument) ?></pre>
 </div>
 

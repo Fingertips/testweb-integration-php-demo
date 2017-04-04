@@ -2,12 +2,15 @@
 
 require 'global.php';
 
+// GET details of the current instrument.
 $response = request('/instruments/' . $_REQUEST['instrument_id']);
 if ($response['status'] != 200) {
+  // Show an error message and exit if the response status code is not 200 OK.
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
 $instrument = $response['data'];
 
+// Loop through all items of the instrument to see if the user has submitted valid responses on all of them.
 $completed = true;
 $valid_responses = [];
 foreach ($instrument['sections'] as $section) {
@@ -15,21 +18,29 @@ foreach ($instrument['sections'] as $section) {
     $options = $item['options'] ? $item['options'] : $instrument['options'];
     $option_values = array_map(function($o) { return $o['value']; }, $options);
     if (in_array($_POST[$item['item_id']], $option_values)) {
+      // We’ve found a valid response submitted by the user on this item, so we add it to our list of valid responses.
       $valid_responses[$item['item_id']] = $_POST[$item['item_id']];
     } else {
+      // We don’t have a valid response submitted by the user on this item, so we now know the administration has not been completed.
       $completed = false;
     }
   }
 }
+
+// If the user has submitted valid responses on all items, then we’ll create an administration using these item responses.
 if ($completed) {
+  // POST the instrument_id and the responses
   $response = request('/administrations', [
     'instrument_id' => $instrument['instrument_id'],
     'responses' => $valid_responses
     ]);
   if ($response['status'] == 201) {
+    // We’ve got a 201 Created response status code, so the administration has been created.
+    // Let’s redirect to the page where we’ll show the report with the scores.
     header('Location: report.php?administration_id=' . $response['data']['administration_id']);
     exit();
   } else {
+    // Show an error message and exit if the response status code is not 201 Created.
     exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
   }
 }

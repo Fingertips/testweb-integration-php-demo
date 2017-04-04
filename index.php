@@ -2,8 +2,10 @@
 
 require 'global.php';
 
+// GET a list of all available instruments.
 $response = request('/instruments');
 if ($response['status'] != 200) {
+  // Show an error message and exit if the response status code is not 200 OK.
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
 $instruments = $response['data'];

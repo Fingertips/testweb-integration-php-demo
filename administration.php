@@ -2,7 +2,7 @@
 
 require 'global.php';
 
-$response = get('/instruments/' . $_REQUEST['instrument_id']);
+$response = request('/instruments/' . $_REQUEST['instrument_id']);
 if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
@@ -22,7 +22,7 @@ foreach ($instrument['sections'] as $section) {
   }
 }
 if ($completed) {
-  $response = post('/administrations', [
+  $response = request('/administrations', [
     'instrument_id' => $instrument['instrument_id'],
     'responses' => $valid_responses
     ]);

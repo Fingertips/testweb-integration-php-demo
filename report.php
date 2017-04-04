@@ -2,13 +2,13 @@
 
 require 'global.php';
 
-$response = get('/administrations/' . $_REQUEST['administration_id'] . '?norm_id=' . $_REQUEST['norm_id']);
+$response = request('/administrations/' . $_REQUEST['administration_id'] . '?norm_id=' . $_REQUEST['norm_id']);
 if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }
 $administration = $response['data'];
 
-$response2 = get('/instruments/' . $administration['instrument_id']);
+$response2 = request('/instruments/' . $administration['instrument_id']);
 if ($response2['status'] != 200) {
   exit('HTTP ' . $response2['status'] . ' ' . $response2['data']['message']);
 }

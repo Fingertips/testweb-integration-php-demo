@@ -2,7 +2,7 @@
 
 require 'global.php';
 
-$response = get('/instruments');
+$response = request('/instruments');
 if ($response['status'] != 200) {
   exit('HTTP ' . $response['status'] . ' ' . $response['data']['message']);
 }

@@ -73,6 +73,8 @@ $instrument = $response_2['data'];
   <?php } ?>
 </ul>
 
+<p><a href=".">Kies een instrument</a></p>
+
 <div class="debug">
 <h2>API response (administration):</h2>
 <p>Completed in <?php echo $response_1['time'] ?>ms.</p>

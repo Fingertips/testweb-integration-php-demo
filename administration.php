@@ -78,7 +78,7 @@ if ($completed) {
       <?php } ?>
       <ol>
         <?php foreach ($section['items'] as $item) { ?>
-          <li>
+          <li <?php if (!empty($valid_responses) && !$valid_responses[$item['item_id']]) { echo ' class="invalid"'; } ?>>
             <p><?php echo $item['stem']; ?></p>
             <div>
             <?php $options = $item['options'] ? $item['options'] : $instrument['options']; ?>

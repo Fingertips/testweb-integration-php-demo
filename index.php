@@ -32,7 +32,7 @@ $instruments = $response['data'];
   <?php } ?>
 </ul>
 
-<p class="note">Please note that you should not implement a selection menu like this as part of your integration. See the “Finding an instrument” section in the Integration API documentation for details.</p>
+<p class="note">Please note that you should not implement a selection menu like this as part of your integration. See the “Finding an instrument” section in the <a href="https://diagnose.testweb.bsl.nl/documentation/">Integration API documentation</a> for details.</p>
 
 <div class="debug">
 <h2>API response (available instruments):</h2>
